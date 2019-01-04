@@ -36,5 +36,10 @@ router.get('/all', function(req, res) {
       res.json(JSON.stringify(result));
 });
 
+router.get('/:id', function (req, res) {
+    console.log(req.params.id);
+    res.json({request: "arrived"})
+})
+
 })
 module.exports = router;
