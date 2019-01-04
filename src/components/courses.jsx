@@ -16,7 +16,9 @@ class Courses extends Component {
     axios.get("/api/all").then(response => {
       console.log(response.data);
       var data = JSON.parse(response.data);
-      console.log(data);
+      this.setState({
+          courses: data
+      })
     });
   };
 
@@ -36,7 +38,7 @@ class Courses extends Component {
               //className="course-list-item"
               //onClick={() => this.setSelectedcourse(course)}
             >
-              {course.title}
+              {course.coursename}
             </li>
           ))}
         </ul>
