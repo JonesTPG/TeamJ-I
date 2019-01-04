@@ -5,11 +5,15 @@ käy tekemässä uusia kysymyksiä genreen. */
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var courseSchema = new Schema({
+var commentSchema = new Schema({
 
-    name         : String,
+    username         : String,
+    text             : String,
+    upvotes          : Number,
+    downvotes        : Number,
+    courseId         : String
     
 });
 
 
-module.exports = mongoose.model('course', courseSchema);
+module.exports = mongoose.model('comment', commentSchema);

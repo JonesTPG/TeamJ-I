@@ -5,11 +5,12 @@ const axios = require("axios");
 class Courses extends Component {
  constructor(props) {
    super(props);
+   
    this.state = {
      courses: null,
      filter: "",
      selectedCourse: null,
-     course_id: null
+     course_id: null //stores the currently selected course id
    };
    this.setFilter = this.setFilter.bind(this);
    this.setSelectedCourse = this.setSelectedCourse.bind(this);
@@ -19,6 +20,7 @@ class Courses extends Component {
  componentDidMount() {
    this.getDataFromDb();
  }
+ 
  getDataFromDb = () => {
    axios.get("/api/all").then(response => {
      console.log(response.data);
