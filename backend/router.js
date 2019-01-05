@@ -40,18 +40,17 @@ router.get('/all', function(req, res) {
 //returns the details of a single course
 router.get('/course/:id', function (req, res) {
     let id = req.params.id;
-    let courseObj = {};
+    
 
-    Course.find({_id: id})
+    Course.findOne({_id: id})
     .lean()
     .exec(function(err, result) {
         if (err) {
             console.log(err);
             res.status(404).send();
         };
-
-        courseObj = JSON.stringify(result);
-        res.json(JSON.stringify(courseObj));
+        
+        res.json(JSON.stringify(result));
 
     })    
 });
@@ -59,8 +58,6 @@ router.get('/course/:id', function (req, res) {
 //returns the comments of a single course
 router.get('/comments/:id', function(req, res) {
     let id = req.params.id;
-    let commentsList;
-
     Comment.find({courseId: id})
     .lean()
     .exec(function(err, results) {
@@ -69,8 +66,7 @@ router.get('/comments/:id', function(req, res) {
             res.status(404).send();
         }
         
-        commentsList = JSON.stringify(results);
-        res.json(JSON.stringify(commentsList));
+        res.json(JSON.stringify(results));
     })
 })
 

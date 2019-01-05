@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Comment from './comment';
 const axios = require('axios');
+
 
 class SelectedCourse extends Component {
     constructor(props) {
@@ -15,20 +17,18 @@ class SelectedCourse extends Component {
     //this component is dependent from the course id it gets, so we have to listen to
     //possible changes
     componentDidUpdate(prevProps, prevState) {
-
-        if (this.props.courseid !== prevProps.courseid) {
-            this.getSelectedCourse();
-            this.getComments();
-        }
         
+        if (this.props.courseid !== prevProps.courseid) {
+            this.getSelectedCourse()
+            this.getComments();
+        }    
     }
 
     //fetches the selected course's information from the server. the id is given to this component as a prop
     getSelectedCourse = () => {
         axios.get("/api/course/"+this.props.courseid).then(response => {
           
-          var data = JSON.parse(response.data);
-          console.log(data);
+          let data = JSON.parse(response.data);
           this.setState({
               selected: data
           })
@@ -38,8 +38,13 @@ class SelectedCourse extends Component {
     getComments = () => {
         axios.get("/api/comments/"+this.props.courseid).then(response => {
         
-        var data = JSON.parse(response.data);
-        console.log(data);
+        let data = JSON.parse(response.data);
+        if (data.length == 0) {
+            this.setState({
+                comments:[{}]
+            })
+            return;
+        }
         this.setState({
             comments: data
         })
@@ -63,7 +68,26 @@ class SelectedCourse extends Component {
         else {
 
             return ( 
-                <p>yksittäinen kurssi</p>
+                <div className="course-view">
+                
+                    <h3>Valittu kurssi: {this.state.selected.coursename} </h3>
+                    <h3>Kurssin id: {this.state.selected.courseid}</h3>
+
+
+                    <ul>
+                        {this.state.comments.map(comment => (
+                        <Comment
+                            key={comment._id}
+                            text={comment.text}
+                            upvotes={comment.upvotes}
+                            downvotes={comment.downvotes}
+                            username={comment.username}
+                        >
+                            
+                        </Comment>
+                        ))}
+                    </ul>
+                </div>
 
             );
         }

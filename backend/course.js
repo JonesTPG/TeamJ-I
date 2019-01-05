@@ -7,8 +7,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var courseSchema = new Schema({
 
-    name         : String,
-    
+    coursename         : String,
+    courseid           : String,
+    rating             : Number,
+    credit             : Number,
+    ratingLength       : Number
+
 });
 
 
