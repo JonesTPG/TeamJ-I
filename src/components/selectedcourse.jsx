@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Comment from './comment';
+import NewComment from './newcomment';
 const axios = require('axios');
 
 
@@ -39,7 +40,7 @@ class SelectedCourse extends Component {
         axios.get("/api/comments/"+this.props.courseid).then(response => {
         
         let data = JSON.parse(response.data);
-        if (data.length == 0) {
+        if (data.length === 0) {
             this.setState({
                 comments:[{}]
             })
@@ -73,20 +74,28 @@ class SelectedCourse extends Component {
                     <h3>Valittu kurssi: {this.state.selected.coursename} </h3>
                     <h3>Kurssin id: {this.state.selected.courseid}</h3>
 
+                    <div className="comments-list">
+                        
+                        <ul>
+                            {this.state.comments.map(comment => (
+                            <Comment
+                                key={comment._id}
+                                text={comment.text}
+                                upvotes={comment.upvotes}
+                                downvotes={comment.downvotes}
+                                username={comment.username}
+                            >
+                            </Comment>
+                            ))}
+                        </ul>
+                    </div>
 
-                    <ul>
-                        {this.state.comments.map(comment => (
-                        <Comment
-                            key={comment._id}
-                            text={comment.text}
-                            upvotes={comment.upvotes}
-                            downvotes={comment.downvotes}
-                            username={comment.username}
-                        >
-                            
-                        </Comment>
-                        ))}
-                    </ul>
+                    <div className="new-comment">
+                             <NewComment courseId={this.props.courseId}></NewComment>   
+                                
+                    </div>
+
+
                 </div>
 
             );
