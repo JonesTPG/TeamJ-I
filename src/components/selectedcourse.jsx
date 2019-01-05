@@ -10,7 +10,7 @@ class SelectedCourse extends Component {
         
         this.state = { 
             selected: {}, //stores the currently selected course's information 
-            comments: [{}] //stores the comments related to selected course
+            comments: null //stores the comments related to selected course
         }   
     }
 
@@ -42,7 +42,7 @@ class SelectedCourse extends Component {
         let data = JSON.parse(response.data);
         if (data.length === 0) {
             this.setState({
-                comments:[{}]
+                comments: null
             })
             return;
         }
@@ -64,8 +64,32 @@ class SelectedCourse extends Component {
                 <p>ei valittua kurssia</p>
             )
         }
+
+        //there are no comments, so don't render the comments list
+        else if (this.state.comments === null) {
+            return (
+                <div className="course-view">
+                
+                    <h3>Valittu kurssi: {this.state.selected.coursename} </h3>
+                    <h3>Kurssin id: {this.state.selected.courseid}</h3>
+                    <h3>Kurssin rating: {this.state.selected.rating}</h3>
+
+                    <div className="comments-list">
+
+                        <p>ei kommentteja</p>
+
+                        <div className="new-comment">
+                            <NewComment courseId={this.props.courseid}></NewComment>               
+                        </div>
+
+
+                    </div>
+                </div>
+
+            )
+        }
         
-        //course is selected, display it's information
+        //course is selected and it has comments, display the information
         else {
 
             return ( 
@@ -75,7 +99,7 @@ class SelectedCourse extends Component {
                     <h3>Kurssin id: {this.state.selected.courseid}</h3>
 
                     <div className="comments-list">
-                        
+
                         <ul>
                             {this.state.comments.map(comment => (
                             <Comment
@@ -91,8 +115,7 @@ class SelectedCourse extends Component {
                     </div>
 
                     <div className="new-comment">
-                             <NewComment courseId={this.props.courseId}></NewComment>   
-                                
+                             <NewComment courseId={this.props.courseid}></NewComment>               
                     </div>
 
 

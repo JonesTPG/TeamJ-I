@@ -70,5 +70,29 @@ router.get('/comments/:id', function(req, res) {
     })
 })
 
+//post a new comment to the server
+router.post('/comments/:courseId', function(req, res) {
+    console.log("received" + req.body.text)
+    
+    let courseid = req.params.courseId;
+
+    let commentText = req.body.text;
+
+    //create new Comment object and save it to the database
+    let comment = new Comment();
+
+    comment.text = commentText;
+    comment.upvotes = 0;
+    comment.downvotes = 0;
+    comment.courseId = courseid;
+    
+    comment.save(function(err) {
+        if (err)
+            throw err;
+        
+        res.json({success: true});
+    });
+})
+
 
 module.exports = router;
