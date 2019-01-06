@@ -168,9 +168,7 @@ class Courses extends Component {
                 </div>
               ))}
             </List>
-            <div className="selectedCourse">
-              <SelectedCourse courseid={this.state.course_id} />
-            </div>
+            <SelectedCourse courseid={this.state.course_id} />
           </div>
         </div>
       </React.Fragment>
