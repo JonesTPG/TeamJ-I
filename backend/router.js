@@ -65,6 +65,21 @@ router.get('/comments/:id', function(req, res) {
         
         res.json(JSON.stringify(results));
     })
+});
+
+//returns the info of a single comment
+router.get('/comment/:id', function(req, res) {
+    let id = req.params.id;
+    Comment.findOne({_id: id})
+    .lean()
+    .exec(function(err, result) {
+        if (err) {
+            console.log(err)
+            res.status(404).send();
+        }
+        
+        res.json(JSON.stringify(result));
+    })
 })
 
 //receives a new comment and saves it to the database
@@ -154,7 +169,8 @@ router.post('/comment/:commentId/vote', function(req, res) {
             console.log(err);
           }
     
-          res.status(200).send();
+          res.json({upvotes: doc.upvotes,
+                    downvotes: doc.downvotes})
         });
       });
 
