@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comment from "./comment";
 import NewComment from "./newcomment";
+
 const axios = require("axios");
 
 class SelectedCourse extends Component {
@@ -81,30 +82,32 @@ class SelectedCourse extends Component {
     //course is selected and it has comments, display the information
     else {
       return (
-        <div className="selectedCourse">
-          <div className="course-view">
-            <h3>
+
+       <div className="selectedCourse">
+        <div className="course-view">
+          <h3>
               {this.state.selected.coursename} {this.state.selected.courseid}
               <hr />
             </h3>
-            <h4>Kurssin rating: {this.state.selected.rating}</h4>
-            <div className="comments-list">
-              <ul>
-                {this.state.comments.map(comment => (
-                  <Comment
-                    key={comment._id}
-                    text={comment.text}
-                    upvotes={comment.upvotes}
-                    downvotes={comment.downvotes}
-                    username={comment.username}
-                  />
-                ))}
-              </ul>
-            </div>
+          <h4>Kurssin rating: {this.state.selected.rating}</h4>
+          <div className="comments-list">
+            <ul>
+              {this.state.comments.map(comment => (
+                <Comment
+                  key={comment._id}
+                  text={comment.text}
+                  upvotes={comment.upvotes}
+                  downvotes={comment.downvotes}
+                  username={comment.username}
+                  commentId={comment._id}
+                />
+              ))}
+            </ul>
+          </div>
+          <div className="new-comment">
+            <NewComment courseId={this.props.courseid} />
+       </div>
 
-            <div className="new-comment">
-              <NewComment courseId={this.props.courseid} />
-            </div>
           </div>
         </div>
       );

@@ -14,6 +14,7 @@
 }
 
 .course-container {
+  padding-top: 60px;
   display: flex;
   align-items: stretch;
   padding: 30 px;
@@ -32,11 +33,14 @@
   transition: 0.7s;
   color: black;
   font-size: 18px;
+  cursor: pointer;
 }
 .course-view {
+  padding-top: 5px;
   text-align: left;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+
 
 .my-form .form-group label{
   display: block;
@@ -66,3 +70,11 @@
  width: 90%;
  font-size: 50px;
 }
+
+.appbar {
+  background-color: #2196f3;
+}
+.score {
+  text-align: center !important;
+}
+

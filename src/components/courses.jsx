@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SelectedCourse from "./selectedcourse";
-import TextField from "@material-ui/core/TextField";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
@@ -8,9 +7,12 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Divider from "@material-ui/core/Divider";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+
 const axios = require("axios");
 
 const styles = theme => ({
@@ -19,6 +21,47 @@ const styles = theme => ({
     maxWidth: 650,
     maxHeight: 400,
     backgroundColor: theme.palette.background.paper
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing.unit,
+      width: "auto"
+    }
+  },
+  searchIcon: {
+    width: theme.spacing.unit * 9,
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  inputRoot: {
+    color: "inherit",
+    width: "100%"
+  },
+  inputInput: {
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 10,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: 120,
+      "&:focus": {
+        width: 200
+      }
+    }
   }
 });
 
@@ -83,15 +126,27 @@ class Courses extends Component {
       <React.Fragment>
         {" "}
         <div>
-          <AppBar position="static" color="primary">
-            <Toolbar>
-              <TextField
-                value={this.state.filter}
-                onChange={this.setFilter}
-                label="Etsi..."
-              />
-            </Toolbar>
-          </AppBar>
+          <div>
+            <AppBar position="fixed">
+              <Toolbar className="appbar">
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon className="search" />
+                  </div>
+                  <InputBase
+                    className="search"
+                    value={this.state.filter}
+                    onChange={this.setFilter}
+                    placeholder="Etsi..."
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput
+                    }}
+                  />
+                </div>
+              </Toolbar>
+            </AppBar>
+          </div>
 
           <div className="course-container">
             <List className={classes.root}>
