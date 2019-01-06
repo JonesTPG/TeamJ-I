@@ -12,3 +12,28 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.course-container {
+  display: flex;
+  align-items: stretch;
+  padding: 30 px;
+}
+
+.selectedCourse {
+  padding: 50px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+.listElement:hover {
+  background-color: #aeb6bf;
+  transition: 0.7s;
+  color: black;
+  font-size: 18px;
+}
+.course-view {
+  text-align: left;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
