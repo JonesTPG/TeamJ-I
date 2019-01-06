@@ -1,7 +1,6 @@
-
 /*Express Router Root: /api
-  Tehtävä: Huolehtii uuden quizin luomisesta, ja tuloksen tallentamisesta
-  */
+  Return data as json, and receives update requests from React Front-End.
+*/
 
 
 var express = require('express');
@@ -12,11 +11,8 @@ var Comment = require('./comment');
 
 router.get('/course', function (req, res) {
    
-
     var course = new Course();
-
     course.name = "test";
-    
 
     course.save(function(err) {
         if (err)
@@ -28,6 +24,7 @@ router.get('/course', function (req, res) {
 
   });
 
+  //returns all of the courses
 router.get('/all', function(req, res) {
   Course.find({})
   .lean()
@@ -70,7 +67,7 @@ router.get('/comments/:id', function(req, res) {
     })
 })
 
-//post a new comment to the server
+//receives a new comment and saves it to the database
 router.post('/comments/:courseId', function(req, res) {
     console.log("received" + req.body.text)
     
@@ -92,7 +89,75 @@ router.post('/comments/:courseId', function(req, res) {
         
         res.json({success: true});
     });
+});
+
+//receives a new rating to the server, and then calculates the new average rating
+router.post('/course/:courseId/rating', function(req, res) {
+    console.log('received rating request');
+
+    let courseId = req.params.courseId;
+    let newRating = parseFloat(req.body.rating);
+    
+    if ( 0<=newRating || newRating>=5 || isNaN(newRating) ) {
+        res.json({failed: "true"})
+    }
+    Course.findOne( {_id: courseId}, function (err, doc) {
+    
+        let curRating = doc.rating;
+        let length = doc.ratingLength;
+        let newAverage = ((curRating*length) + newRating); //this is the sum of all the ratings including the new one
+        newAverage = newAverage / (length+1); //new average is calculated based on the new length
+        
+        doc.rating = newAverage;
+        doc.ratingLength = length+1;
+        
+        doc.save(function (err) {
+          if (err) {
+            console.log(err);
+          }
+          res.status(200).send();
+        });
+      });
+
 })
 
+//receives a new vote for the comment, it then updates the comment accordingly
+router.post('/comment/:commentId/vote', function(req, res) {
+    console.log('received vote request');
+
+    let commentId = req.params.commentId;
+    let newVoteType = req.body.vote;
+    console.log("new vote" + newVoteType)
+
+    
+    Comment.findOne( {_id: commentId}, function (err, doc) {
+    
+        let curUpvotes = doc.upvotes;
+        let curDownvotes = doc.downvotes;
+
+        console.log("upvotet: "+ curUpvotes + " downvotet: " + curDownvotes)
+        
+        if (newVoteType === 'upvote') {
+            doc.upvotes = curUpvotes+1;
+        }
+
+        else if (newVoteType === 'downvote') {
+            doc.downvotes = curDownvotes+1;
+        }
+
+        else {
+            res.status(500).send();
+        }
+        
+        doc.save(function (err) {
+          if (err) {
+            console.log(err);
+          }
+    
+          res.status(200).send();
+        });
+      });
+
+})
 
 module.exports = router;
