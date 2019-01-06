@@ -53,10 +53,7 @@ class NewComment extends Component {
   render() {
     return (
       <div>
-        <p>
-          kurssin id:
-          {this.props.courseId}
-        </p>
+        
         <div className="my-form">
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">

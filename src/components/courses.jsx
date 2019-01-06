@@ -70,7 +70,6 @@ class Courses extends Component {
     super(props);
 
     this.state = {
-      checked: true,
       courses: null,
       filter: "",
       selectedCourse: null,
@@ -92,12 +91,6 @@ class Courses extends Component {
       this.setState({
         courses: data
       });
-    });
-  };
-
-  handleToggle = () => {
-    this.setState({
-      checked: !this.state.checked
     });
   };
 
@@ -157,12 +150,7 @@ class Courses extends Component {
                     onClick={() => this.setSelectedCourse(course._id)}
                   >
                     {course.courseid} {course.coursename}
-                    <ListItemSecondaryAction>
-                      <Checkbox
-                        checked={this.state.isChecked}
-                        onChange={this.handleToggle}
-                      />
-                    </ListItemSecondaryAction>
+                   
                   </ListItem>
                   <Divider light />
                 </div>

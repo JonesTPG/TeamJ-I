@@ -17,12 +17,18 @@ class Comment extends Component {
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
   }
+
+  componentDidMount() {
+    //get upvotes and downvotes for the specific comment  
+  }
   increment() {
+    //post request add upvote
     this.setState({
       increment: this.state.increment + 1
     });
   }
   decrement() {
+    //post request add downvote
     this.setState({
       decrement: this.state.decrement - 1
     });
@@ -32,7 +38,7 @@ class Comment extends Component {
       <div>
         <h3>kommentti</h3>
         <p>{this.props.text}</p>
-        <p>käyttäjä: {this.props.username}</p>
+        <p>käyttäjä: anonymous</p>
         <div>
           {this.state.increment}
           <IconButton

@@ -93,6 +93,7 @@ class SelectedCourse extends Component {
           <div className="comments-list">
             <ul>
               {this.state.comments.map(comment => (
+                <div>
                 <Comment
                   key={comment._id}
                   text={comment.text}
@@ -100,7 +101,11 @@ class SelectedCourse extends Component {
                   downvotes={comment.downvotes}
                   username={comment.username}
                   commentId={comment._id}
-                />
+                />   <hr></hr>
+                </div>
+                
+             
+                
               ))}
             </ul>
           </div>
