@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comment from "./comment";
 import NewComment from "./newcomment";
+
 const axios = require("axios");
 
 class SelectedCourse extends Component {
@@ -96,7 +97,6 @@ class SelectedCourse extends Component {
               ))}
             </ul>
           </div>
-
           <div className="new-comment">
             <NewComment courseId={this.props.courseid} />
           </div>
