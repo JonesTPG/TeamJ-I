@@ -73,13 +73,6 @@ class Courses extends Component {
       return "loading";
     }
 
-    const filtered = this.state.courses.filter(
-      course =>
-        course.coursename
-          .toLowerCase()
-          .indexOf(this.state.filter.toLowerCase()) !== -1
-    );
-
     return (
       <React.Fragment>
         {" "}
