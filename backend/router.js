@@ -102,7 +102,7 @@ router.post('/comments/:courseId', function(req, res) {
         if (err)
             throw err;
         
-        res.json({success: true});
+        res.status(200).send();
     });
 });
 
@@ -114,7 +114,7 @@ router.post('/course/:courseId/rating', function(req, res) {
     let newRating = parseFloat(req.body.rating);
     
     if ( 0<=newRating || newRating>=5 || isNaN(newRating) ) {
-        res.json({failed: "true"})
+        res.status(500).send();
     }
     Course.findOne( {_id: courseId}, function (err, doc) {
     

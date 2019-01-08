@@ -19,20 +19,16 @@ class NewComment extends Component {
     //prevent the page from reloading
     e.preventDefault();
 
-    console.log(this.state.text);
     //check that the comment has some text and then send it to the server.
     if (this.state.text === null || this.state.text.length < 5) {
       this.setState({
         message: "Kommenttisi on liian lyhyt."
       });
-      return;
-    } else {
-      console.log(
-        "lähetetään tämä serverille" +
-          this.state.text +
-          "osoitteeseen" +
-          this.props.courseId
-      );
+      this.props.updateFunction();
+    } 
+    
+    else {
+      //construct a json object which will be sent to the server
       let data = {
         text: this.state.text,
         courseId: this.props.courseId
@@ -40,13 +36,12 @@ class NewComment extends Component {
       axios
         .post("/api/comments/" + this.props.courseId, data)
         .then(response => {
-          console.log("serveri vastasi");
-          let data = JSON.parse(response.data);
-          console.log(data);
           this.setState({
-            message: "Kommentti tallennettu."
+            message: "Kommentti tallennettu.",
+            text: ''
           });
         });
+        this.props.updateFunction();
     }
   };
 
@@ -64,7 +59,7 @@ class NewComment extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <input className="button" type="submit" value="Submit" />
+            <input className="button" type="submit" value="Lähetä" />
           </form>
           <p>{this.state.message}</p>
         </div>

@@ -21,11 +21,8 @@ class Comment extends Component {
 
   componentDidMount() {
     //get upvotes and downvotes for the specific comment
-    console.log("haetaan upvotet")
     axios.get('/api/comment/'+this.props.commentId).then(response => {
-      console.log(response.data)
       var data = JSON.parse(response.data);
-      console.log(data.upvotes);
       this.setState({
         increment: data.upvotes,
         decrement: -data.downvotes
@@ -35,6 +32,7 @@ class Comment extends Component {
 
 
   }
+
   increment() {
     //post request add upvote
 
@@ -42,41 +40,37 @@ class Comment extends Component {
       vote: 'upvote'
     };
 
-    console.log(this.props.commentId)
     axios
       .post("/api/comment/" + this.props.commentId + "/vote", data)
       .then(response => {
-        console.log("serveri vastasi");
-        
         this.setState({
           increment: this.state.increment + 1
         });
         
       });
   }
+
   decrement() {
     let data = {
       vote: 'downvote'
     };
 
-    console.log(this.props.commentId)
     axios
       .post("/api/comment/" + this.props.commentId + "/vote", data)
-      .then(response => {
-        console.log("serveri vastasi");
-        
+      .then(response => { 
         this.setState({
           decrement: this.state.decrement - 1
         });
         
       });
   }
+
   render() {
     return (
       <div>
-        <h3>kommentti</h3>
-        <p>{this.props.text}</p>
-        <p>käyttäjä: anonymous</p>
+        <strong>kommentti {this.props.index+1}</strong>
+        <p className="comment-text">{this.props.text}</p>
+        <p>kommentoija: anonymous</p>
         <div>
           {this.state.increment}
           <IconButton

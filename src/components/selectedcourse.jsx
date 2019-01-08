@@ -33,6 +33,7 @@ class SelectedCourse extends Component {
     });
   };
 
+  //fetch the comments of a certain course from the database
   getComments = () => {
     axios.get("/api/comments/" + this.props.courseid).then(response => {
       let data = JSON.parse(response.data);
@@ -47,6 +48,11 @@ class SelectedCourse extends Component {
       });
     });
   };
+
+  updateComments = () => {
+    this.getComments();
+    this.forceUpdate();
+  }
 
   render() {
     let id = this.props.courseid;
@@ -71,7 +77,9 @@ class SelectedCourse extends Component {
               <p>Ei kommentteja.</p>
 
               <div className="new-comment">
-                <NewComment courseId={this.props.courseid} />
+                <NewComment courseId={this.props.courseid}
+                            updateFunction={this.updateComments} 
+                />
               </div>
             </div>
           </div>
@@ -88,30 +96,36 @@ class SelectedCourse extends Component {
           <h3>
               {this.state.selected.coursename} {this.state.selected.courseid}
               <hr />
-            </h3>
+          </h3>
           <h4>Kurssin rating: {this.state.selected.rating}</h4>
           <div className="comments-list">
             <ul>
-              {this.state.comments.map(comment => (
-                <div>
-                <Comment
+              {this.state.comments.map((comment, index) => (
+                <div
                   key={comment._id}
+                >
+
+                <Comment
+                  
                   text={comment.text}
                   upvotes={comment.upvotes}
                   downvotes={comment.downvotes}
                   username={comment.username}
                   commentId={comment._id}
+                  index={index}
+                  
                 />   <hr></hr>
                 </div>
-                
-             
-                
+              
               ))}
             </ul>
           </div>
+
           <div className="new-comment">
-            <NewComment courseId={this.props.courseid} />
-       </div>
+            <NewComment courseId={this.props.courseid}
+                        updateFunction={this.updateComments}
+            />
+          </div>
 
           </div>
         </div>

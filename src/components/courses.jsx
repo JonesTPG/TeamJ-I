@@ -6,8 +6,6 @@ import List from "@material-ui/core/List";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Checkbox from "@material-ui/core/Checkbox";
 import Divider from "@material-ui/core/Divider";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
@@ -86,7 +84,6 @@ class Courses extends Component {
 
   getDataFromDb = () => {
     axios.get("/api/all").then(response => {
-      console.log(response.data);
       var data = JSON.parse(response.data);
       this.setState({
         courses: data
@@ -137,20 +134,18 @@ class Courses extends Component {
                     }}
                   />
                 </div>
+                <p className="site-title">Kurssipalaute.fi</p>
               </Toolbar>
             </AppBar>
           </div>
 
           <div className="course-container">
             <List className={classes.root}>
-              {filtered.map(course => (
-                <div className="listElement">
-                  <ListItem
-                    key={course._id}
-                    onClick={() => this.setSelectedCourse(course._id)}
-                  >
-                    {course.courseid} {course.coursename}
-                   
+              {filtered.slice(0,14).map(course => (
+                <div className="listElement"
+                    key={course._id}>
+                  <ListItem onClick={() => this.setSelectedCourse(course._id)}>
+                      {course.courseid} {course.coursename}
                   </ListItem>
                   <Divider light />
                 </div>

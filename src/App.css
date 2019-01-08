@@ -13,6 +13,17 @@
   color: white;
 }
 
+.comment-text {
+  font-style: italic;
+}
+
+.site-title {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: auto;
+  
+}
+
 .course-container {
   padding-top: 60px;
   display: flex;
@@ -41,6 +52,26 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
+.course-view {
+  margin-left: 10px;
+ 
+}
+.noCourseTxt { 
+ width: 90%;
+ font-size: 50px;
+}
+
+.appbar {
+  background-color: #2196f3;
+}
+.score {
+  text-align: center !important;
+}
+
+
+
+
+/*comment-form*/
 
 .my-form .form-group label{
   display: block;
@@ -63,18 +94,3 @@
   margin-bottom: 0;
   padding-bottom: 0;
 }
-.course-view {
-  margin-left: 10px;
-}
-.noCourseTxt { 
- width: 90%;
- font-size: 50px;
-}
-
-.appbar {
-  background-color: #2196f3;
-}
-.score {
-  text-align: center !important;
-}
-
