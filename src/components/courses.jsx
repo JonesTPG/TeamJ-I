@@ -84,7 +84,7 @@ class Courses extends Component {
 
   getDataFromDb = () => {
     axios.get("/api/all").then(response => {
-      var data = JSON.parse(response.data);
+      let data = JSON.parse(response.data);
       this.setState({
         courses: data
       });
@@ -105,6 +105,7 @@ class Courses extends Component {
     if (this.state.courses === null) {
       return "loading";
     }
+  
     const filtered = this.state.courses.filter(
       course =>
         course.coursename
@@ -139,7 +140,9 @@ class Courses extends Component {
             </AppBar>
           </div>
 
-          <div className="course-container">
+          <div className="body-container">
+
+            
             <List className={classes.root}>
               {filtered.slice(0,14).map(course => (
                 <div className="listElement"
@@ -151,6 +154,7 @@ class Courses extends Component {
                 </div>
               ))}
             </List>
+            
             <SelectedCourse courseid={this.state.course_id} />
           </div>
         </div>

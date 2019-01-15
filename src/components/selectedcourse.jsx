@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comment from "./comment";
 import NewComment from "./newcomment";
+import Rating from "./rating"
 
 const axios = require("axios");
 
@@ -10,7 +11,7 @@ class SelectedCourse extends Component {
 
     this.state = {
       selected: {}, //stores the currently selected course's information
-      comments: null //stores the comments related to selected course
+      comments: null, //stores the comments related to selected course
     };
   }
 
@@ -41,6 +42,7 @@ class SelectedCourse extends Component {
         this.setState({
           comments: null
         });
+
         return;
       }
       this.setState({
@@ -49,9 +51,13 @@ class SelectedCourse extends Component {
     });
   };
 
+  //when a user posts a comment, this function is called from the child component.
   updateComments = () => {
     this.getComments();
-    this.forceUpdate();
+  }
+
+  updateRating = () => {
+    this.getSelectedCourse();
   }
 
   render() {
@@ -72,7 +78,10 @@ class SelectedCourse extends Component {
               <hr />
             </h3>
             <h4>Kurssin rating: {this.state.selected.rating}</h4>
-
+            <Rating 
+              courseId={this.props.courseid}
+              updateFunction={this.updateRating}
+            />
             <div className="comments-list">
               <p>Ei kommentteja.</p>
 
@@ -97,7 +106,11 @@ class SelectedCourse extends Component {
               {this.state.selected.coursename} {this.state.selected.courseid}
               <hr />
           </h3>
-          <h4>Kurssin rating: {this.state.selected.rating}</h4>
+          <h4>Kurssin rating: {this.state.selected.rating.toFixed(2)}</h4>
+          <Rating 
+              courseId={this.props.courseid}
+              updateFunction={this.updateRating}
+          />
           <div className="comments-list">
             <ul>
               {this.state.comments.map((comment, index) => (
