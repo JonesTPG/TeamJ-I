@@ -10,15 +10,23 @@ import Divider from "@material-ui/core/Divider";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-
-const axios = require("axios");
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
+import axios from "axios";
+import "../App.css";
 
 const styles = theme => ({
   root: {
-    width: "50%",
-    maxWidth: 650,
-    maxHeight: 400,
+    flexGrow: 1,
     backgroundColor: theme.palette.background.paper
+  },
+  control: {
+    padding: theme.spacing.unit * 2
+  },
+  paper: {
+    height: 600,
+    width: 500
   },
   search: {
     position: "relative",
@@ -55,9 +63,9 @@ const styles = theme => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: 120,
+      width: 500,
       "&:focus": {
-        width: 200
+        width: 580
       }
     }
   }
@@ -114,51 +122,62 @@ class Courses extends Component {
     );
 
     return (
-      <React.Fragment>
-        {" "}
-        <div>
+      <div className="some-page-wrapper">
+        <React.Fragment>
           <div>
-            <AppBar position="fixed">
-              <Toolbar className="appbar">
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon className="search" />
+            <div>
+              <AppBar position="fixed">
+                <Toolbar className="appbar">
+                  <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                      <SearchIcon className="search" />
+                    </div>
+                    <InputBase
+                      className="search"
+                      value={this.state.filter}
+                      onChange={this.setFilter}
+                      placeholder="Etsi..."
+                      classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput
+                      }}
+                    />
                   </div>
-                  <InputBase
-                    className="search"
-                    value={this.state.filter}
-                    onChange={this.setFilter}
-                    placeholder="Etsi..."
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput
-                    }}
-                  />
-                </div>
-                <p className="site-title">Kurssipalaute.fi</p>
-              </Toolbar>
-            </AppBar>
-          </div>
 
-          <div className="body-container">
-
-            
-            <List className={classes.root}>
-              {filtered.slice(0,14).map(course => (
-                <div className="listElement"
-                    key={course._id}>
-                  <ListItem onClick={() => this.setSelectedCourse(course._id)}>
-                      {course.courseid} {course.coursename}
-                  </ListItem>
-                  <Divider light />
+                  <p className="site-title">Kurssipalaute.fi</p>
+                </Toolbar>
+              </AppBar>
+            </div>
+            <div className="row">
+              <div className="column">
+                <div>
+                  <List className={classes.root}>
+                    {filtered.slice(0, 20).map(course => (
+                      <div className="listElement" key={course._id}>
+                        <ListItem
+                          onClick={() => this.setSelectedCourse(course._id)}
+                        >
+                          {course.courseid} {course.coursename}
+                          <ListItemSecondaryAction>
+                            <IconButton aria-label="Comments">
+                              <ArrowForwardIos />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                        <Divider light />
+                      </div>
+                    ))}
+                  </List>
                 </div>
-              ))}
-            </List>
-            
-            <SelectedCourse courseid={this.state.course_id} />
+              </div>
+              <div className="column">
+                <SelectedCourse courseid={this.state.course_id} />
+              </div>
+            </div>
+
           </div>
-        </div>
-      </React.Fragment>
+        </React.Fragment>
+      </div>
     );
   }
 }

@@ -1,16 +1,11 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
 .App {
   text-align: center;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .comment-text {
@@ -21,7 +16,6 @@
   font-size: 24px;
   text-transform: uppercase;
   margin: auto;
-  
 }
 
 .body-container {
@@ -36,11 +30,12 @@
 
 .selectedCourse {
   padding: 50px;
-  border: 2px solid rgb(0, 0, 0);
+  border: 2px solid #333;
   border-radius: 10px;
   margin-left: 10px;
-  margin-top: 50px;
-  margin-bottom: 10px;
+  margin-top: 11px;
+  overflow: auto;
+  height: 80%;
 }
 .listElement:hover {
   background-color: #aeb6bf;
@@ -53,15 +48,12 @@
   padding-top: 5px;
   text-align: left;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-left: 10px;
 }
 
-.course-view {
-  margin-left: 10px;
- 
-}
-.noCourseTxt { 
- width: 90%;
- font-size: 50px;
+.noCourseTxt {
+  width: 90%;
+  font-size: 50px;
 }
 
 .appbar {
@@ -71,20 +63,19 @@
   text-align: center !important;
 }
 
-
-
-
 /*comment-form*/
 
-.my-form .form-group label{
+.my-form .form-group label {
   display: block;
   padding-bottom: 5px;
 }
-.my-form .form-group .textarea{
+.my-form .form-group .textarea {
   padding-top: 15px;
   width: 100%;
 }
+
 .button{
+
   background-color: #333;
   color: #fff;
   padding: 10px 15px;
@@ -93,14 +84,39 @@
   border-radius: 15px;
   cursor: pointer;
 }
-.my-form p{
+.my-form p {
   color: red;
   margin-bottom: 0;
   padding-bottom: 0;
 }
+
 
 /*rating bar*/
 
 .checked {
   color: orange;
 }
+
+.commentWriter {
+  color: #117743;
+}
+
+/*layout styling*/
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+.some-page-wrapper {
+  margin: 70px;
+  background-color: #fff;
+}
+
