@@ -1,12 +1,36 @@
 import React, { Component } from "react";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import "../App.css";
+
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit
+  },
+  button: {
+    margin: theme.spacing.unit,
+    color: "#2196f3"
+  }
+});
 
 class NewComment extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: "",
-      message: null
+      message: null,
+      multiline: "Controlled"
     };
   }
 
@@ -25,9 +49,7 @@ class NewComment extends Component {
         message: "Kommenttisi on liian lyhyt."
       });
       this.props.updateFunction();
-    } 
-    
-    else {
+    } else {
       //construct a json object which will be sent to the server
       let data = {
         text: this.state.text,
@@ -38,28 +60,40 @@ class NewComment extends Component {
         .then(response => {
           this.setState({
             message: "Kommentti tallennettu.",
-            text: ''
+            text: ""
           });
         });
-        this.props.updateFunction();
+      this.props.updateFunction();
     }
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        
         <div className="my-form">
           <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label>Kirjoita kommentti:</label>
-              <textarea
-                className="textarea"
+            <div className={classes.container} noValidate autoComplete="off">
+              <TextField
+                fullWidth
+                className={classes.textField}
+                label="Kirjoita kommentti"
+                placeholder="Kirjoita kommentti"
+                multiline
                 value={this.state.text}
                 onChange={this.handleChange}
+                margin="normal"
+                variant="outlined"
               />
             </div>
-            <input className="button" type="submit" value="Lähetä" />
+            <Button
+              type="submit"
+              value="lähetä"
+              variant="outlined"
+              className={classes.button}
+            >
+              Lähetä
+            </Button>
           </form>
           <p>{this.state.message}</p>
         </div>
@@ -67,5 +101,8 @@ class NewComment extends Component {
     );
   }
 }
+NewComment.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
-export default NewComment;
+export default withStyles(styles)(NewComment);
