@@ -84,8 +84,6 @@ router.get('/comment/:id', function(req, res) {
 
 //receives a new comment and saves it to the database
 router.post('/comments/:courseId', function(req, res) {
-    console.log("received" + req.body.text)
-    
     let courseid = req.params.courseId;
 
     let commentText = req.body.text;
@@ -108,14 +106,15 @@ router.post('/comments/:courseId', function(req, res) {
 
 //receives a new rating to the server, and then calculates the new average rating
 router.post('/course/:courseId/rating', function(req, res) {
-    console.log('received rating request');
-
+    
     let courseId = req.params.courseId;
     let newRating = parseFloat(req.body.rating);
     
-    if ( 0<=newRating || newRating>=5 || isNaN(newRating) ) {
+    if ( newRating<1 || newRating>5 || isNaN(newRating) ) {
         res.status(500).send();
+        return;
     }
+
     Course.findOne( {_id: courseId}, function (err, doc) {
     
         let curRating = doc.rating;
@@ -138,19 +137,14 @@ router.post('/course/:courseId/rating', function(req, res) {
 
 //receives a new vote for the comment, it then updates the comment accordingly
 router.post('/comment/:commentId/vote', function(req, res) {
-    console.log('received vote request');
-
+  
     let commentId = req.params.commentId;
     let newVoteType = req.body.vote;
-    console.log("new vote" + newVoteType)
-
-    
+ 
     Comment.findOne( {_id: commentId}, function (err, doc) {
     
         let curUpvotes = doc.upvotes;
         let curDownvotes = doc.downvotes;
-
-        console.log("upvotet: "+ curUpvotes + " downvotet: " + curDownvotes)
         
         if (newVoteType === 'upvote') {
             doc.upvotes = curUpvotes+1;
