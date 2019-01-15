@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import Comment from "./comment";
 import NewComment from "./newcomment";
-
-const axios = require("axios");
+import axios from "axios";
 
 class SelectedCourse extends Component {
   constructor(props) {
@@ -52,7 +51,7 @@ class SelectedCourse extends Component {
   updateComments = () => {
     this.getComments();
     this.forceUpdate();
-  }
+  };
 
   render() {
     let id = this.props.courseid;
@@ -72,13 +71,13 @@ class SelectedCourse extends Component {
               <hr />
             </h3>
             <h4>Kurssin rating: {this.state.selected.rating}</h4>
-
             <div className="comments-list">
               <p>Ei kommentteja.</p>
 
               <div className="new-comment">
-                <NewComment courseId={this.props.courseid}
-                            updateFunction={this.updateComments} 
+                <NewComment
+                  courseId={this.props.courseid}
+                  updateFunction={this.updateComments}
                 />
               </div>
             </div>
@@ -90,43 +89,37 @@ class SelectedCourse extends Component {
     //course is selected and it has comments, display the information
     else {
       return (
-
-       <div className="selectedCourse">
-        <div className="course-view">
-          <h3>
+        <div className="selectedCourse">
+          <div className="course-view">
+            <h3>
               {this.state.selected.coursename} {this.state.selected.courseid}
               <hr />
-          </h3>
-          <h4>Kurssin rating: {this.state.selected.rating}</h4>
-          <div className="comments-list">
-            <ul>
-              {this.state.comments.map((comment, index) => (
-                <div
-                  key={comment._id}
-                >
+            </h3>
+            <h4>Kurssin rating: {this.state.selected.rating}</h4>
+            <div className="comments-list">
+              <ul>
+                {this.state.comments.map((comment, index) => (
+                  <div key={comment._id}>
+                    <Comment
+                      text={comment.text}
+                      upvotes={comment.upvotes}
+                      downvotes={comment.downvotes}
+                      username={comment.username}
+                      commentId={comment._id}
+                      index={index}
+                    />{" "}
+                    <hr />
+                  </div>
+                ))}
+              </ul>
+            </div>
 
-                <Comment
-                  
-                  text={comment.text}
-                  upvotes={comment.upvotes}
-                  downvotes={comment.downvotes}
-                  username={comment.username}
-                  commentId={comment._id}
-                  index={index}
-                  
-                />   <hr></hr>
-                </div>
-              
-              ))}
-            </ul>
-          </div>
-
-          <div className="new-comment">
-            <NewComment courseId={this.props.courseid}
-                        updateFunction={this.updateComments}
-            />
-          </div>
-
+            <div className="new-comment">
+              <NewComment
+                courseId={this.props.courseid}
+                updateFunction={this.updateComments}
+              />
+            </div>
           </div>
         </div>
       );

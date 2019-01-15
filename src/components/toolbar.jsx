@@ -15,6 +15,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   search: {
+    zIndex: 1,
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -22,7 +23,7 @@ const styles = theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
     marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
+    marginLeft: 60,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing.unit * 3,
@@ -36,7 +37,8 @@ const styles = theme => ({
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    zIndex: 1
   },
   inputRoot: {
     color: "inherit",
