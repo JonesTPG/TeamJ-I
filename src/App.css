@@ -120,3 +120,21 @@ html {
   background-color: #fff;
 }
 
+
+/* progress bar */
+
+.progress-bar {
+  background-color: black;
+  border-radius: 13px;
+  /* (height of inner div) / 2 + padding */
+  padding: 3px;
+}
+
+#progress {
+  background-color: orange;
+  width: 20%; /* Adjust with JavaScript */
+  height: 20px;
+  border-radius: 10px;
+}
+
+

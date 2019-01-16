@@ -22,6 +22,7 @@ class SelectedCourse extends Component {
     if (this.props.courseid !== prevProps.courseid) {
       this.getSelectedCourse();
       this.getComments();
+      
     }
   }
 
@@ -32,6 +33,7 @@ class SelectedCourse extends Component {
       this.setState({
         selected: data
       });
+      this.updateRatingBar();
     });
   };
 
@@ -62,6 +64,13 @@ class SelectedCourse extends Component {
     this.getSelectedCourse();
   }
 
+  updateRatingBar = () => {
+    let element = document.getElementById("progress");
+    let ratingPercentage = this.state.selected.rating * 20;
+    let ratingString = ratingPercentage.toString() + "%";
+    element.style["width"] = ratingString;
+
+  }
 
   render() {
     let id = this.props.courseid;
@@ -81,6 +90,10 @@ class SelectedCourse extends Component {
               <hr />
             </h3>
             <h4>Kurssin rating: {this.state.selected.rating}</h4>
+
+            <div className="progress-bar">
+              <div id="progress"></div>
+            </div>
 
             <Rating 
               courseId={this.props.courseid}
@@ -114,6 +127,11 @@ class SelectedCourse extends Component {
 
           </h3>
           <h4>Kurssin rating: {this.state.selected.rating.toFixed(2)}</h4>
+
+          <div className="progress-bar">
+              <div id="progress"></div>
+          </div>
+
           <Rating 
               courseId={this.props.courseid}
               updateFunction={this.updateRating}
@@ -147,13 +165,6 @@ class SelectedCourse extends Component {
             />
           </div>
 
-
-            <div className="new-comment">
-              <NewComment
-                courseId={this.props.courseid}
-                updateFunction={this.updateComments}
-              />
-            </div>
           </div>
         </div>
       );
