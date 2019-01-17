@@ -34,8 +34,6 @@ html {
   border-radius: 10px;
   margin-left: 10px;
   margin-top: 11px;
-  overflow: auto;
-  height: 80%;
 }
 .listElement:hover {
   background-color: #aeb6bf;
@@ -120,6 +118,35 @@ html {
   background-color: #fff;
 }
 
+.Courses-inputInput-7 {
+  width: 100% !important;
+}
+.Courses-inputInput-9 {
+  padding-left: 60px !important;
+}
+.BottomAppBar-toolbar-15 {
+  align-items: flex-end !important;
+}
+.footer {
+  margin: auto !important;
+  width: 100% !important;
+  padding: 10px !important;
+}
+
+header,
+.MuiPaper-root-17
+  .MuiPaper-elevation4-23
+  .MuiAppBar-root-44
+  .MuiAppBar-positionFixed-45
+  .MuiAppBar-colorPrimary-51
+  mui-fixed
+  .BottomAppBar-appBar-14 {
+  max-height: 50px !important;
+}
+.listItem {
+  font-weight: 600;
+}
+
 
 /* progress bar */
 
@@ -136,5 +163,4 @@ html {
   height: 20px;
   border-radius: 10px;
 }
-
 

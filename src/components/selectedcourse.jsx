@@ -77,7 +77,7 @@ class SelectedCourse extends Component {
 
     //there is no course selected
     if (id === null || id === "" || id === undefined) {
-      return <p className="noCourseTxt">Valitse jokin kurssi</p>;
+      return <div className="noCourseTxt">Valitse jokin kurssi</div>;
     }
 
     //there are no comments, so don't render the comments list
