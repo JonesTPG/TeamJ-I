@@ -22,8 +22,8 @@ const styles = theme => ({
   },
   bigAvatar: {
     marginRight: 10,
-    width: 45,
-    height: 45
+    width: 40,
+    height: 40
   },
   root: {
     flexGrow: 1,
