@@ -18,12 +18,15 @@ html {
   margin: auto;
 }
 
-.course-container {
+.body-container {
   padding-top: 60px;
   display: flex;
-  align-items: stretch;
-  padding: 30 px;
+
+  /*align-items: stretch;*/
+  /* padding: 30px; */
 }
+
+
 
 .selectedCourse {
   padding: 50px;
@@ -68,19 +71,30 @@ html {
   padding-top: 15px;
   width: 100%;
 }
-.my-form .button {
+
+.button{
+
   background-color: #333;
   color: #fff;
   padding: 10px 15px;
   margin-top: 10px;
   border: none;
   border-radius: 15px;
+  cursor: pointer;
 }
 .my-form p {
   color: red;
   margin-bottom: 0;
   padding-bottom: 0;
 }
+
+
+/*rating bar*/
+
+.checked {
+  color: orange;
+}
+
 .commentWriter {
   color: #117743;
 }
@@ -103,6 +117,7 @@ html {
   margin: 70px;
   background-color: #fff;
 }
+
 .Courses-inputInput-7 {
   width: 100% !important;
 }
@@ -131,3 +146,21 @@ header,
 .listItem {
   font-weight: 600;
 }
+
+
+/* progress bar */
+
+.progress-bar {
+  background-color: black;
+  border-radius: 13px;
+  /* (height of inner div) / 2 + padding */
+  padding: 3px;
+}
+
+#progress {
+  background-color: orange;
+  width: 20%; /* Adjust with JavaScript */
+  height: 20px;
+  border-radius: 10px;
+}
+

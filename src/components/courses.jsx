@@ -99,7 +99,7 @@ class Courses extends Component {
 
   getDataFromDb = () => {
     axios.get("/api/all").then(response => {
-      var data = JSON.parse(response.data);
+      let data = JSON.parse(response.data);
       this.setState({
         courses: data
       });
@@ -120,6 +120,7 @@ class Courses extends Component {
     if (this.state.courses === null) {
       return "loading";
     }
+  
     const filtered = this.state.courses.filter(
       course =>
         course.coursename
@@ -192,6 +193,7 @@ class Courses extends Component {
                 <SelectedCourse courseid={this.state.course_id} />
               </div>
             </div>
+
           </div>
         </React.Fragment>
       </div>
