@@ -13,7 +13,8 @@ const styles = theme => ({
   },
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
+    color: "#2196f3"
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
@@ -21,6 +22,9 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
     color: "#2196f3"
+  },
+  buttonCancel: {
+    color: "inherit"
   }
 });
 
@@ -93,6 +97,14 @@ class NewComment extends Component {
               className={classes.button}
             >
               Lähetä
+            </Button>
+            <Button
+              color="inherit"
+              value="Peruuta"
+              variant="outlined"
+              className={classes.buttonCancel}
+            >
+              peruuta
             </Button>
           </form>
           <p>{this.state.message}</p>

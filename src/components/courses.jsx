@@ -17,6 +17,14 @@ import axios from "axios";
 import "../App.css";
 
 const styles = theme => ({
+  avatar: {
+    margin: 10
+  },
+  bigAvatar: {
+    marginRight: 10,
+    width: 45,
+    height: 45
+  },
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper
@@ -38,8 +46,7 @@ const styles = theme => ({
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing.unit,
-      width: "auto"
+      marginLeft: theme.spacing.unit
     }
   },
   searchIcon: {
@@ -127,22 +134,32 @@ class Courses extends Component {
             <div>
               <AppBar position="fixed">
                 <Toolbar className="appbar">
+                  <img
+                    src="https://image.flaticon.com/icons/svg/910/910350.svg"
+                    className={classes.bigAvatar}
+                    alt="The choice is yours"
+                    style={{
+                      margin: "0px 6px 0px -13px",
+                      cursor: "pointer",
+                      opacity: 0.8
+                    }}
+                  />
                   <div className={classes.search}>
                     <div className={classes.searchIcon}>
                       <SearchIcon className="search" />
                     </div>
+
                     <InputBase
                       className="search"
                       value={this.state.filter}
                       onChange={this.setFilter}
-                      placeholder="Etsi..."
+                      placeholder="Hae kurssia..."
                       classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput
                       }}
                     />
                   </div>
-                  <p className="site-title">Kurssipalaute.fi</p>
                 </Toolbar>
               </AppBar>
             </div>
@@ -150,19 +167,22 @@ class Courses extends Component {
               <div className="column">
                 <div>
                   <List className={classes.root}>
-                    {filtered.slice(0, 20).map(course => (
+                    {filtered.slice(0, 12).map(course => (
                       <div className="listElement" key={course._id}>
                         <ListItem
+                          className="listItem"
                           onClick={() => this.setSelectedCourse(course._id)}
                         >
-                          {course.courseid} {course.coursename}
+                          {course.courseid}
+                          <br />
+                          {course.coursename}
                           <ListItemSecondaryAction>
                             <IconButton aria-label="Comments">
                               <ArrowForwardIos />
                             </IconButton>
                           </ListItemSecondaryAction>
                         </ListItem>
-                        <Divider light />
+                        <Divider />
                       </div>
                     ))}
                   </List>

@@ -11,6 +11,8 @@
     "express": "^4.16.4",
     "mdbreact": "^4.8.7",
     "mongoose": "^5.4.2",
+    "next": "^7.0.2",
+    "next-routes": "^1.4.2",
     "react": "^16.7.0",
     "react-d3-speedometer": "^0.4.2",
     "react-dom": "^16.7.0",
