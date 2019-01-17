@@ -4,7 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import Paper from "@material-ui/core/Paper";
 import "../App.css";
 
 const styles = theme => ({
@@ -14,7 +13,8 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 2
   },
   paper: {
-    paddingBottom: 30
+    paddingBottom: 50,
+    backgroundColor: "#FEF!"
   },
   list: {
     marginBottom: theme.spacing.unit * 2
@@ -43,7 +43,6 @@ function Footer(props) {
     <div className="bottomBar">
       <React.Fragment>
         <CssBaseline />
-        <Paper square className={classes.paper} />
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <div className="footer">

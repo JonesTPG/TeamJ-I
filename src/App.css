@@ -26,8 +26,6 @@ html {
   /* padding: 30px; */
 }
 
-
-
 .selectedCourse {
   padding: 50px;
   border: 2px solid #333;
@@ -72,8 +70,7 @@ html {
   width: 100%;
 }
 
-.button{
-
+.button {
   background-color: #333;
   color: #fff;
   padding: 10px 15px;
@@ -87,7 +84,6 @@ html {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-
 
 /*rating bar*/
 
@@ -147,20 +143,18 @@ header,
   font-weight: 600;
 }
 
-
 /* progress bar */
 
 .progress-bar {
-  background-color: black;
+  background-color: #333;
   border-radius: 13px;
   /* (height of inner div) / 2 + padding */
   padding: 3px;
 }
 
 #progress {
-  background-color: orange;
+  background-color: #2196f3;
   width: 20%; /* Adjust with JavaScript */
   height: 20px;
   border-radius: 10px;
 }
-

@@ -27,7 +27,8 @@ const styles = theme => ({
   },
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    paddingBottom: 30
   },
   control: {
     padding: theme.spacing.unit * 2
@@ -120,7 +121,7 @@ class Courses extends Component {
     if (this.state.courses === null) {
       return "loading";
     }
-  
+
     const filtered = this.state.courses.filter(
       course =>
         course.coursename
@@ -193,7 +194,6 @@ class Courses extends Component {
                 <SelectedCourse courseid={this.state.course_id} />
               </div>
             </div>
-
           </div>
         </React.Fragment>
       </div>
