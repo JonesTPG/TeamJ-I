@@ -46,7 +46,7 @@ function Footer(props) {
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <div className="footer">
-              <p className={classes.poweredBy}> © Powered by Team J-I</p>
+              <p className={classes.poweredBy}> © 2019 Powered by Team J-I</p>
             </div>
           </Toolbar>
         </AppBar>

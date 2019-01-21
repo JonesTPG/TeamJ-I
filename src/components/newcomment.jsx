@@ -90,22 +90,24 @@ class NewComment extends Component {
                 variant="outlined"
               />
             </div>
-            <Button
-              type="submit"
-              value="lähetä"
-              variant="outlined"
-              className={classes.button}
-            >
-              Lähetä
-            </Button>
-            <Button
-              color="inherit"
-              value="Peruuta"
-              variant="outlined"
-              className={classes.buttonCancel}
-            >
-              peruuta
-            </Button>
+            <div>
+              <Button
+                type="submit"
+                value="lähetä"
+                variant="outlined"
+                className={classes.button}
+              >
+                Lähetä
+              </Button>
+              <Button
+                color="inherit"
+                value="Peruuta"
+                variant="outlined"
+                className={classes.buttonCancel}
+              >
+                peruuta
+              </Button>
+            </div>
           </form>
           <p>{this.state.message}</p>
         </div>

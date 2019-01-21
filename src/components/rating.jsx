@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import CheckIcon from "@material-ui/icons/Check";
 import { withStyles } from "@material-ui/core";
+import "../App.css";
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    color: "#2196f3"
+    color: "#2196f3",
+    variant: "outlined"
   }
 });
 
@@ -86,7 +89,6 @@ class Rating extends Component {
     const { classes } = this.props;
     return (
       <>
-        <p>Arvostele kurssi:</p>
         <form onSubmit={this.handleSubmit}>
           <span
             id="1-rating"
@@ -113,14 +115,14 @@ class Rating extends Component {
             className="fa fa-star"
             onClick={() => this.handleOptionChange(5)}
           />
-          <Button
+          <IconButton
             type="submit"
             value="lähetä"
             variant="outlined"
             className={classes.button}
           >
-            Arvostele
-          </Button>
+            <CheckIcon />
+          </IconButton>
         </form>
         <p>{this.state.infoMessage}</p>
       </>
