@@ -88,7 +88,7 @@ html {
 /*rating bar*/
 
 .checked {
-  color: orange;
+  color: #2196f3;
 }
 
 .commentWriter {
@@ -157,4 +157,9 @@ header,
   width: 20%; /* Adjust with JavaScript */
   height: 20px;
   border-radius: 10px;
+}
+.fa,
+.far,
+.fas {
+  cursor: pointer;
 }
